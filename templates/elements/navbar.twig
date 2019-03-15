@@ -1,0 +1,85 @@
+<aside class="left-sidebar">
+    <div class="scroll-sidebar">
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li class="nav-small-cap">PERSONAL</li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="{#{{ session.auth.user_role == 'client' ? '/home' : '/admin' }}#}/home">
+                        <i class="mdi mdi-gauge"></i>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+                {#<li>
+                    <a class="has-arrow waves-effect waves-dark" href="{{ session.auth.user_role != "client" ? '/admin/companies' : '/companies'}}" aria-expanded="false">
+                        <i class="mdi mdi-bullseye"></i>
+                        <span class="hide-menu">
+                            {% if session.auth.user_role == "admin" or session.auth.user_role == "employee" %}
+                                Companies
+                            {% else %}
+                                My Companies
+                            {% endif %}
+                        </span>
+                    </a>
+                </li>#}
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="/companies" aria-expanded="false">
+                        <i class="mdi mdi-bullseye"></i>
+                        <span class="hide-menu">
+                            {% if session.auth.user_role == "admin" or session.auth.user_role == "employee" %}
+                                Companies
+                            {% else %}
+                                My Companies
+                            {% endif %}
+                        </span>
+                    </a>
+                </li>
+                <li class="two-column">
+                    <a class="has-arrow waves-effect waves-dark" href="/orders" aria-expanded="false">
+                        <i class="mdi mdi-book-open-variant"></i>
+                        <span class="hide-menu">
+                            {% if session.auth.user_role == "admin" or session.auth.user_role == "employee" %}
+                                Orders
+                            {% else %}
+                                My Orders
+                            {% endif %}
+                        </span>
+                    </a>
+                </li>
+                <li class="two-column">
+                    <a class="has-arrow waves-effect waves-dark" href="/invoices" aria-expanded="false">
+                        <i class="mdi mdi-file"></i>
+                        <span class="hide-menu">
+                            {% if session.auth.user_role == "admin" or session.auth.user_role == "employee" %}
+                                Invoices
+                            {% else %}
+                               My Invoices
+                            {% endif %}
+                        </span>
+                    </a>
+                </li>
+                {% if session.auth.user_role == "admin" or session.auth.user_role == "employee" %}
+                    {#<li class="two-column">#}
+                        {#<a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">#}
+                            {#<i class="mdi mdi-file"></i>#}
+                            {#<span class="hide-menu">Billing</span>#}
+                        {#</a>#}
+                    {#</li>#}
+                    <li class="two-column">
+                        <a class="has-arrow waves-effect waves-dark" href="/support" aria-expanded="false">
+                            <i class="mdi mdi-file"></i>
+                            <span class="hide-menu">Support</span>
+                        </a>
+                    </li>
+                    {% if session.auth.user_role == "admin" %}
+                        <li class="two-column">
+                            <a class="has-arrow waves-effect waves-dark" href="/users" aria-expanded="false">
+                                <i class="mdi mdi-file"></i>
+                                <span class="hide-menu">Users</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</aside>

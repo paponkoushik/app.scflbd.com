@@ -1,0 +1,228 @@
+{% extends 'layouts/application.twig' %}
+{% block title %} SCFL | Orders {% endblock %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Orders</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active"><a href="/orders">Order</a></li>
+                <li class="breadcrumb-item active">Details [{{ orderDetails.user.first_name }}]</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body printableArea">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <h3><span>#{{ orderDetails.orders_sl }}</span></h3>
+                        </div>
+                        <div class="pull-right">
+                            <a href="/download">
+                                <button class="btn btn-success">Download</button>
+                            </a>
+                            <a>
+                                <button class="btn btn-primary" onclick="window.print()">print</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <address>
+                                <h3> &nbsp;<b class="text-danger">{{ orderDetails.user.first_name }} {{ orderDetails.user.last_name }}</b>
+                                </h3>
+                                <p class="text-muted m-l-5">
+                                    <br/>
+                                    {% if orderDetails.user.address is not empty %}
+                                        {{ orderDetails.user.address }},
+                                    {% endif %}
+                                    {% if orderDetails.user.city is not empty %}
+                                        {{ orderDetails.user.city }},
+                                    {% endif %}
+                            </address>
+                        </div>
+                        <div class="pull-right text-right">
+                            <address>
+                                <h3>To,</h3>
+                                <h4 class="font-bold">Gaala & Sons,</h4>
+                                <p class="text-muted m-l-30">E 104, Dharti-2,
+                                    <br/> Nr' Viswakarma Temple,
+                                    <br/> Talaja Road,
+                                    <br/> Bhavnagar - 364002</p>
+                                <p class="m-t-30"><b>Invoice Date :</b> <i
+                                            class="fa fa-calendar"></i> {{ orderDetails.invoice.create | date('d M, Y, h:i a') }}
+                                </p>
+                                <p><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ 'now' | date("d M, Y, h:i a") }}</p>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pull-right m-t-30 text-right">
+                            <p>Sub - Total amount: ${{ orderDetails.invoice.sub_total }}</p>
+                            <p>vat (0%) : ${{ orderDetails.invoice.sub_total }} </p>
+                            <hr>
+                            <h3><b>Total :</b> ${{ orderDetails.invoice.total }}</h3>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        {#<div class="text-right">
+                            <button class="btn btn-danger" type="submit"> Proceed to payment </button>
+                            <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
+                        </div>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body printableArea">
+                <h3><b>ITEM LISTS</b> <span class="pull-right">#{{ orderDetails.orders_sl }}</span></h3>
+                <hr>
+                <div class="col-md-12">
+                    {% if orderDetails.invoice.items | length > 0 %}
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Created</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in orderDetails.invoice.items %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.created | date("M d, Y, h:i a") }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <div class="text-center">
+                            <span class="text-danger">No order found</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body printableArea">
+                <h3><b>INVOICES</b> <span class="pull-right">#{{ orderDetails.orders_sl }}</span></h3>
+                <hr>
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Invoice SL</th>
+                            <th>Sub Total</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><a href="/invoices/{{ orderDetails.invoice.uuid }}">{{ orderDetails.invoice.id }}</a></td>
+                            <td><a href="/invoices/{{ orderDetails.invoice.uuid }}">{{ orderDetails.invoice.invoice_sl ?: '' }}</a></td>
+                            <td>${{ orderDetails.invoice.sub_total ?: '' }}</td>
+                            <td>${{ orderDetails.invoice.total ?: '' }}</td>
+                            <td>{{ orderDetails.status == 0 ? "Pending" : "Completed" }}</td>
+                            <td>{{ orderDetails.invoice.created | date("M d, Y, h:i a") }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <form action="/notes?related_with_id={{ orderDetails.id }}&related_with=order&from=/orders/{{ orderDetails.uuid }}" method="post">
+                        <div class="col-md-12">
+                            <label class="card-title">Notes</label>
+                            <div class="form-group">
+                                <textarea type="text" class="form-control" name="comments" rows="4" placeholder="Write your note here...."></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="card-title">Private</label>
+                                <select class="form-control" name="is_private" rows="4">
+                                    <option value="1">Yes</option>
+                                    <option value="0" selected="selected">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success btn-sm text-light">Add Note</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <h4 class="card-title">Recent Notes</h4>
+                    <h6 class="card-subtitle">Latest Notes</h6>
+                    {% if orderDetails.notes | length > 0  %}
+                        <div class="comment-widgets m-b-20">
+                            {% for note in orderDetails.notes %}
+                                <div class="d-flex flex-row comment-row">
+                                    <div class="p-2"><span class="round">
+                                    {% if not note.user.profile_pic is empty %}
+                                        <img src="/{{ note.user.profile_pic }}" class="profile-pic" style="width: 30px"
+                                             onerror="this.onerror=null;this.src='/assets/images/users/profile.jpeg'"
+                                             alt="{{ note.user.first_name ~ " " ~ note.user.last_name }}"/>
+                                    {% else %}
+                                        <img src="/assets/images/users/profile.jpeg" class="profile-pic"
+                                             alt="{{ note.user.first_name ~ " " ~ note.user.last_name }}"
+                                             style="width: 30px"/>
+                                    {% endif %}
+                                </span>
+                                    </div>
+                                    <div class="comment-text w-100">
+                                        <h5>{{ note.user.first_name?:"-" }} {{ note.user.last_name }}</h5>
+                                        <div class="comment-footer">
+                                            <span class="date">{{ note.created|date("M d, Y, h:i:s a") }}</span>
+
+                                            {% if session.auth.user_info.role != "client" %}
+                                                <span class="action-icons">
+                                                    <a href="/notes/{{ note.uuid }}/delete"><i
+                                                                class="mdi mdi-delete"></i></a>
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                        <p class="m-b-5 m-t-10">{{ note.comments }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center">
+                            <span class="text-danger">There has no comments.</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

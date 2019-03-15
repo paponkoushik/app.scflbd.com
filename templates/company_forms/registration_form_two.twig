@@ -1,0 +1,158 @@
+{% extends 'layouts/company_registration_layout.twig' %}
+{% block title %} SCFL | Company Registration {% endblock %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Company Director</h3>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-7 col-xlg-8 col-md-7">
+            <div class="card">
+                <ul class="nav nav-tabs profile-tab" role="tablist">
+                    <li class="nav-item nav-link">Particulars of Shareholders/Directors</li>
+                </ul>
+                <div class="card-body">
+                    <form class="form-horizontal form-material" method="post" action="/start/company-registration/form-submit">
+                        {% for data in userCompanyData %}
+                            {% for key, getData in data %}
+                                <input type="hidden" name="{{ key }}" value="{{ getData }}">
+                            {% endfor %}
+                        {% endfor %}
+                        <div class="form-group">
+                            <label class="col-md-12">Name</label>
+                            <div class="col-md-12">
+                                <input type="text"  name="company_director[name]" class="form-control form-control-line">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Father's/Husband's Name</label>
+                                    <input type="text"  name="company_director[father_or_husband_name]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Mother's Name</label>
+                                    <input type="text"  name="company_director[mother_name]" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Present Address</label>
+                                    <textarea name="company_director[present_address]" class="form-control form-control-line"></textarea>
+                                </div>
+                                {#<div class="col-md-6">
+                                    <label class="col-md-12">Permanent Address</label>
+                                    <textarea name="company_director[permanent_address]" class="form-control form-control-line"></textarea>
+                                </div>#}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Mobile No.</label>
+                                    <input type="text"  name="company_director[mobile]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Email Address</label>
+                                    <input type="text"  name="company_director[email_address]" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Date Of Birth</label>
+                            <div class="col-md-12">
+                                <input  type="date" name="company_director[date_of_birth]" class="form-control form-control-line">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Designation</label>
+                                    <input type="text"  name="company_director[designation]" class="form-control form-control-line">
+                                </div>
+                                {#<div class="col-md-6">
+                                    <label class="col-md-12">Occupation</label>
+                                    <input type="text"  name="company_director[occupation]" class="form-control form-control-line">
+                                </div>#}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="col-md-12">ETIN No.</label>
+                                    <input type="text"  name="company_director[etin_no]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-12">Shares Quantity</label>
+                                    <input type="text"  name="company_director[shares_quantity]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-12">NID/Passport No.</label>
+                                    <input type="text"  name="company_director[nid_password_no]" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-xlg-4 col-md-5">
+            <div class="card">
+                <ul class="nav nav-tabs profile-tab" role="tablist">
+                </ul>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <b>1<sup>st</sup> Step</b><br>
+                            Name Clearance (Govt.690) =
+                        </div>
+                        <div class="col-md-6">
+                            <b>Govt. Fees</b><br>
+                            1200/=
+                        </div>
+                    </div><br><br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <b>2<sup>nd</sup> Step</b><br>
+                            <p>5 Lac</p>
+                            <p>10 Lac</p>
+                            <p>20 Lac</p>
+                            <p><b>1 (One) Core</b></p>
+                            <p>3 (Three) Core</p>
+                            <p>5 (Five) Core</p>
+                            <p><b>6 (Six) Core</b></p>
+                            <p>7 (Seven) Core</p>
+                            <p>10 (Ten) Core</p>
+                            <p>50 (Fifty) Core</p>
+                            <p>100 (Hundred) Core</p>
+                        </div>
+                        <div class="col-md-6">
+                            <b>Govt. Fees</b><br>
+                            <p>15,020/=</p>
+                            <p>20,020/=</p>
+                            <p>25,020/=</p>
+                            <p><b>50,020/=</b></p>
+                            <p>70, 020/=</p>
+                            <p>90, 020/=</p>
+                            <p><b>1,00,020/=</b></p>
+                            <p>1,22, 020/=</p>
+                            <p>1,52, 020/=</p>
+                            <p>5,52, 020/=</p>
+                            <p>10,52, 020/=</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

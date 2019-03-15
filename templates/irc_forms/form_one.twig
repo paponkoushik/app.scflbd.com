@@ -1,0 +1,156 @@
+{% extends 'layouts/company_registration_layout.twig' %}
+{% block title %} SCFL | Company Registration {% endblock %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Import Registration Certificate (IRC)</h3>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <form class="form-horizontal form-material" method="post" action="/start/IRC">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <ul class="nav nav-tabs profile-tab" role="tablist">
+                        <li class="nav-item nav-link">User (General Information)</li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">First Name</label>
+                                    <input type="text"  name="user[first_name]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Last Name</label>
+                                    <input type="text"  name="user[last_name]" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Mobile No.</label>
+                                    <input type="text"  name="user[mobile]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Email address</label>
+                                    <input type="email"  name="user[email_address]" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <ul class="nav nav-tabs profile-tab" role="tablist">
+                        <li class="nav-item nav-link">Owner/MD Information</li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">ID Card</label>
+                                    <input name="IRC[md_id_card]" type="file" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Photo</label>
+                                    <input name="IRC[md_photo]" type="file" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <ul class="nav nav-tabs profile-tab" role="tablist">
+                        <li class="nav-item nav-link">eTIN/Trade</li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Company eTIN</label>
+                                    <input name="IRC[company_tin]" type="file" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Trade License</label>
+                                    <input name="IRC[trade_license]" type="file" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <ul class="nav nav-tabs profile-tab" role="tablist">
+                        <li class="nav-item nav-link">Bank & Certificate</li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Bank A/C (Solvency)</label>
+                                    <input name="IRC[bank_ac]" type="file" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Incorporation Certificate</label>
+                                    <input name="IRC[incorporation_certificate]" type="file" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <ul class="nav nav-tabs profile-tab" role="tablist">
+                        <li class="nav-item nav-link">Membership</li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <label class="col-md-12">Owner Membership</label>
+                                        <input name="IRC[membership]" type="text" class="form-control form-control-line">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-lg-4 col-xlg-3 col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><b>Govt. Fees : </b></p>
+                            <p>Govt. Fees = 8000/- (Fees 7000 + Book 1000) + 15%</p>
+                            <p><b>And Documentation and Consultancy = 10, 000/=</b></p>
+                            <p><b>Time: 15 days</b></p>
+                            <p><b>Code: Sonali Bank</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

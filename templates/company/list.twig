@@ -1,0 +1,174 @@
+{% extends 'layouts/application.twig' %}
+{% block title %} SCFL | Company {% endblock %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Company</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active">Company</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-default">
+                <div class="card-header">
+                    <div class="card-actions">
+                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div class="card mb-3" style="border: none">
+                            <div class="card-body">
+                                <div class="">
+                                    <h5 class="card-title">Search Company</h5>
+                                    <form method="get" action="/companies">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="company_name_one" value="{{ queryData.company_name_one }}" placeholder="Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <select class="form-control" name="business_type">
+                                                        <option value="">Select Type</option>
+                                                        <option value="society" {{ queryData.business_type == 'society' ? 'selected' : '' }}>Society</option>
+                                                        <option value="public_company" {{ queryData.business_type == 'public_company' ? 'selected' : '' }}>Public Company</option>
+                                                        <option value="private_company" {{ queryData.business_type == 'private_company' ? 'selected' : '' }}>Private Company</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <select class="form-control" name="status">
+                                                        <option value="">Select Status</option>
+                                                        <option value="rejected" {{ queryData.status == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                                        <option value="registered" {{ queryData.status == 'registered' ? 'selected' : '' }}>Registered</option>
+                                                        <option value="pending" {{ queryData.status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                        <option value="cancelled" {{ queryData.status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                                        <option value="under_processing" {{ queryData.status == 'under_processing' ? 'selected' : '' }}>Under Processing</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <div class="fa-pull-left">
+                                                        <button type="submit" class="btn btn-primary">Search</button>
+                                                    </div>
+                                                    <div class="fa-pull-right">
+                                                        <a class="btn btn-info" href="/companies">Reset</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body collapse show">
+                    <div class="table-responsive">
+                        {% if companies | length > 0 %}
+                            <table class="table product-overview">
+                                <thead>
+                                <tr>
+                                    <th>Company Name</th>
+                                    <th>Company Holder</th>
+                                    <th>Type</th>
+                                    <th>Authorised Cap.</th>
+                                    <th>Paid Up Cap.</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for company in companies %}
+                                    <tr>
+                                        <td><a href="/companies/details/{{ company.uuid }}">{{ company.company_name_one }}</a></td>
+                                        <td><a href="/companies/details/{{ company.uuid }}">{{ company.user.first_name }} {{ company.user.last_name }}</a></td>
+                                        <td>
+                                            {% if company.business_type == 'society' %}
+                                                <span class="text-info">{{ "society" | capitalize }}</span>
+                                            {% elseif company.business_type == 'public_company' %}
+                                                <span class="text-success">{{ "Public Company" | capitalize }}</span>
+                                            {% elseif company.business_type == 'private_company' %}
+                                                <span class="text-warning">{{ "Private Company" | capitalize }}</span>
+                                            {% elseif company.business_type == 'new' %}
+                                                <span class="text-warning">{{ "New" | capitalize }}</span>
+                                            {% elseif company.business_type == 'proprietorship' %}
+                                                <span class="text-success">{{ "Proprietorship" | capitalize }}</span>
+                                            {% elseif company.business_type == 'partnership' %}
+                                                <span class="text-info">{{ "Partnership" | capitalize }}</span>
+                                            {% elseif company.business_type == 'joint_venture' %}
+                                                <span class="text-primary">{{ "Joint Venture" | capitalize }}</span>
+                                            {% else %}
+
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if company.authorised_capital is not empty %}
+                                                {{ company.authorised_capital }} BDT
+                                            {% else %}
+                                                {{ "00.00 BDT" }}
+                                            {% endif %}
+                                        </td>
+                                        <td>{% if company.paid_up_capital is not empty %}
+                                                {{ company.paid_up_capital }} BDT
+                                            {% else %}
+                                                {{ "00.00 BDT" }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if company.status == "rejected" %}
+                                                <span class="label label-danger ">{{ "Rejected" }}</span>
+                                            {% elseif company.status == "registered" %}
+                                                <span class="label label-success">{{ "Registered" }}</span>
+                                            {% elseif company.status == "pending" %}
+                                                <span class="label label-warning">{{ "Pending" }}</span>
+                                            {% elseif company.status == "cancelled" %}
+                                                <span class="label label-danger">{{ "Cancelled" }}</span>
+                                            {% elseif company.status == "under_processing" %}
+                                                <span class="label label-primary">{{ "Under Processing" }}</span>
+                                            {% elseif company.status == "active" %}
+                                                <span class="label label-success">{{ "Active" }}</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <div class="text-center">
+                                <span class="text-danger">No company found</span>
+                            </div>
+                        {% endif %}
+                        <span class="text-muted">
+                            showing
+                            {{ ((page - 1) * perPage) + 1 }} - {{ page * perPage > total ? total : page * perPage }}
+                            of {{ total }} records
+                        </span>
+                    </div>
+                    <br>
+                    <div class="fa-pull-right">
+                        {% if page < maxPage %}
+                        <a class="btn btn-primary btn-sm text-light" href="/companies?page={{ page + 1 }}">Next</a>
+                        {% endif %}
+                    </div>
+                    <div class="fa-pull-left">
+                        {% if page > 1 %}
+                        <a class="btn btn-primary btn-sm text-light" href="/companies?page={{ page - 1 }}">Previous</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

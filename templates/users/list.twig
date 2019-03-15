@@ -1,0 +1,119 @@
+{% extends 'layouts/application.twig' %}
+{% block title %} SCFL | Users {% endblock %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Users</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active">Users</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-default">
+                <div class="card-header">
+                    <div class="card-actions">
+                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div class="card mb-3" style="border: none">
+                            <div class="card-body">
+                                <div class="">
+                                    <h5 class="card-title">Search Users</h5>
+                                    <form method="get" action="/users">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="name" value="" id="formGroupExampleInput2" placeholder="Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="email_address"  value="" id="formGroupExampleInput2" placeholder="Email Address" >
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="phone_number" id="formGroupExampleInput2" placeholder="Phone Number" >
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <div class="fa-pull-left">
+                                                        <button type="submit" class="btn btn-primary" id="formGroupExampleInput2">Search</button>
+                                                    </div>
+                                                    <div class="fa-pull-right">
+                                                        <a href="/users" class="btn btn-info" id="formGroupExampleInput2">Reset</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body collapse show">
+                    {% if users | length > 0 %}
+                    <div class="table-responsive">
+                        <table class="table product-overview">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email Address</th>
+                                <th>Phone</th>
+                                <th>Company Name</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td><a href="/users/{{ user.uuid }}">{{ user.first_name }} {{ user.last_name }}</a></td>
+                                    <td>{{ user.email_address }}</td>
+                                    <td>{{ user.phone ?: '-' }}</td>
+                                    <td>{{ user.company_name ?: '-' }}</td>
+                                    <td class="text-justify" style="color: white">
+                                        <a class="btn btn-sm btn-info" href="/users/{{ user.uuid }}" title="Edit this user?">Edit</a>
+                                        <a class="btn btn-sm btn-danger" title="Delete this user?">Delete</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                    <div class="text-center">
+                        <span class=" text-danger"> Data Not Found </span>
+                    </div>
+                    {% endif %}
+                    <span class="text-muted">
+                            showing
+                        {{ ((page - 1) * perPage) + 1 }} - {{ page * perPage > total ? total : page * perPage }}
+                        of {{ total }} records
+                    </span>
+                    <br>
+                    <div class="fa-pull-right">
+                        {% if page < maxPage %}
+                            <a class="btn btn-primary btn-sm text-light" href="/users?page={{ page + 1 }}">Next</a>
+                        {% endif %}
+                    </div>
+                    <div class="fa-pull-left">
+                        {% if page > 1 %}
+                            <a class="btn btn-primary btn-sm text-light" href="/users?page={{ page - 1 }}">Previous</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

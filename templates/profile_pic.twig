@@ -1,0 +1,96 @@
+{% extends 'layouts/application.twig' %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Profile</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active">Profile</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <center class="m-t-30">
+                    {% if not userInfo.profile_pic is empty %}
+                        <img src="/{{ userInfo.profile_pic }}" class="profile-pic" style="width: 80px"
+                             onerror="this.onerror=null;this.src='/assets/images/users/profile.jpeg'"/>
+                    {% else %}
+                        <img src="/assets/images/users/profile.jpeg" class="profile-pic"/>
+                    {% endif %}
+                    <h4 class="card-title m-t-10">
+                        {% if not userInfo is empty %}
+                            {{ userInfo.first_name | capitalize }} {{ userInfo.last_name | capitalize }}
+                        {% endif %}
+                    </h4>
+                    <h6 class="card-subtitle">
+                        {% if not session.auth.user_role is empty %}
+                            {{ session.auth.user_role | capitalize }}
+                        {% endif %}
+                    </h6>
+                </center>
+            </div>
+            <div>
+                <hr> </div>
+            <div class="card-body"> <small class="text-muted">Email address </small>
+                <h6>
+                    {% if not userInfo.email_address is empty %}
+                        {{ userInfo.email_address }}
+                    {% endif %}
+                </h6>
+                <small class="text-muted p-t-30 db">Phone</small>
+                <h6>
+                    {% if not userInfo.phone is empty %}
+                        {{ userInfo.phone }}
+                    {% else %}
+                        <span>N/A</span>
+                    {% endif %}
+                </h6>
+                <small class="text-muted p-t-30 db">Address</small>
+                <h6>
+                    {% if not userInfo.address is empty %}
+                        {{ userInfo.address }}
+                    {% else %}
+                        <span>N/A</span>
+                    {% endif %}
+                </h6>
+                <div class="map-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div> <small class="text-muted p-t-30 db">Social Profile</small>
+                <br/>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-facebook"></i></button>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-twitter"></i></button>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-youtube"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card">
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item nav-link">Settings</li>
+            </ul>
+            <div class="card-body">
+                <center class="m-t-30">
+                    {% if not userInfo.profile_pic is empty %}
+                        <img src="/{{ userInfo.profile_pic }}" class="profile-pic" style="width: 80px"
+                             onerror="this.onerror=null;this.src='/assets/images/users/profile.jpeg'"/>
+                    {% else %}
+                        <img src="/assets/images/users/profile.jpeg" class="profile-pic"/>
+                    {% endif %}
+                </center> <br>
+                <form method="post" accept-charset="utf-8" controller="users" enctype="multipart/form-data" action="/change-profile-pic/{{ userInfo.uuid }}" class="ng-pristine ng-valid">
+                    <input name="photo" type="file" class="form-control well-sm" required="required">
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-success">Change Photo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

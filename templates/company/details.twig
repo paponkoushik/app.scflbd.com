@@ -1,0 +1,811 @@
+{% extends 'layouts/application.twig' %}
+{% block title %} SCFL | Company Details {% endblock %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Company</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active"><a href="/companies">Company</a></li>
+                <li class="breadcrumb-item active">Details [{{ companyDetails.company_name_one }}]</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <form class="form-horizontal form-material" action="/companies/update/{{ companyDetails.uuid }}" method="post">
+                <div class="card">
+                    <ul class="nav nav-tabs profile-tab" role="tablist" style="margin-top: 25px">
+                        <li class="nav-item nav-link"><h4>Company Details</h4></li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Company Name One</b></label>
+                                    <input type="text" name="company_name_one" class="form-control form-control-line"
+                                           value="{{ companyDetails.company_name_one }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Company Name Two</b></label>
+                                    <input type="text" name="company_name_two" class="form-control form-control-line"
+                                           value="{{ companyDetails.company_name_two }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Company Name Three</b></label>
+                                    <input type="text" name="company_name_three" class="form-control form-control-line"
+                                           value="{{ companyDetails.company_name_three }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Company Name Four</b></label>
+                                    <input type="text" name="company_name_four" class="form-control form-control-line"
+                                           value="{{ companyDetails.company_name_four }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Primary Street</b></label>
+                                    <input type="text" name="primary_street" class="form-control form-control-line"
+                                           value="{{ companyDetails.primary_street }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Secondary Street</b></label>
+                                    <input type="text" name="secondary_street" class="form-control form-control-line"
+                                           value="{{ companyDetails.secondary_street }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Postcode</b></label>
+                                    <input type="number" name="postcode" class="form-control form-control-line"
+                                           value="{{ companyDetails.postcode }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>City</b></label>
+                                    <input type="text" name="city" class="form-control form-control-line"
+                                           value="{{ companyDetails.city }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Country</b></label>
+                                    <input type="text" name="country" class="form-control form-control-line"
+                                           value="{{ companyDetails.country }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Authorised Capital</b></label>
+                                    <input type="number" name="authorised_capital"
+                                           class="form-control form-control-line"
+                                           value="{{ companyDetails.authorised_capital }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Paid Up Capital</b></label>
+                                    <input type="number" name="paid_up_capital" class="form-control form-control-line"
+                                           value="{{ companyDetails.paid_up_capital }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Qualification Of Director</b></label>
+                                    <input type="text" name="qualification_of_director"
+                                           class="form-control form-control-line"
+                                           value="{{ companyDetails.qualification_of_director }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Board meeting</b></label>
+                                    <input type="text" name="board_meeting" class="form-control form-control-line"
+                                           value="{{ companyDetails.board_meeting }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>AGM</b></label>
+                                    <input type="text" name="agm" class="form-control form-control-line"
+                                           value="{{ companyDetails.agm }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Chairman</b></label>
+                                    <input type="text" name="chairman" class="form-control form-control-line"
+                                           value="{{ companyDetails.chairman }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Managing Director</b></label>
+                                    <input type="text" name="managing_director" class="form-control form-control-line"
+                                           value="{{ companyDetails.managing_director }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Power Of Management</b></label>
+                                    <input type="text" name="power_of_management" class="form-control form-control-line"
+                                           value="{{ companyDetails.power_of_management }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Signing Bank Ac</b></label>
+                                    <input type="text" name="signing_bank_ac" class="form-control form-control-line"
+                                           value="{{ companyDetails.signing_bank_ac }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Business Type</b></label>
+                                    <select class="form-control form-control-line" name="business_type">
+                                        <option value="public_company"
+                                                {{ companyDetails.business_type == "public_company" ? "selected" : "" }}>
+                                            Public Company
+                                        </option>
+                                        <option value="society"
+                                                {{ companyDetails.business_type == "society" ? "selected" : "" }}>
+                                            society
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Created</b></label>
+                                    <input type="text" name="created" class="form-control form-control-line"
+                                           value="{{ companyDetails.created | date('M d, Y, h:i a') }}" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success btn-sm text-light" type="submit">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12">
+            <form class="form-horizontal form-material" action="/companies/user-update" method="post">
+                <div class="card">
+                    <ul class="nav nav-tabs profile-tab" role="tablist" style="margin-top: 25px">
+                        <li class="nav-item nav-link"><h4>Company User's Details</h4></li>
+                    </ul>
+                    <input type="hidden" name="id" class="form-control form-control-line"
+                           value="{{ companyDetails.user.id }}">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>First Name</b></label>
+                                    <input type="text" name="first_name" class="form-control form-control-line"
+                                           value="{{ companyDetails.user.first_name }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Last Name</b> </label>
+                                    <input type="text" name="last_name" class="form-control form-control-line"
+                                           value="{{ companyDetails.user.last_name }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Email Address</b> </label>
+                                    <input type="text" name="email_address" class="form-control form-control-line"
+                                           value="{{ companyDetails.user.email_address }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Gender</b> </label>
+                                    <select class="form-control form-control-line" name="gender">
+                                        <option value="male"
+                                                {{ companyDetails.user.gender == "male" ? "selected" : "" }}>Male
+                                        </option>
+                                        <option value="female"
+                                                {{ companyDetails.user.gender == "female" ? "selected" : "" }}>Female
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Company Name</b> </label>
+                                    <input type="text" name="company_name" class="form-control form-control-line"
+                                           value="{{ companyDetails.user.company_name }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Website</b> </label>
+                                    <input type="text" name="website" class="form-control form-control-line"
+                                           value="{{ companyDetails.user.website }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Role</b> </label>
+                                    <select class="form-control form-control-line" name="role">
+                                        <option value="employee"
+                                                {{ companyDetails.user.role == "employee" ? "selected" : "" }}>Employee
+                                        </option>
+                                        <option value="admin"
+                                                {{ companyDetails.user.role == "admin" ? "selected" : "" }}>Admin
+                                        </option>
+                                        <option value="client"
+                                                {{ companyDetails.user.role == "client" ? "selected" : "" }}>Client
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>City</b></label>
+                                    <input type="text" name="city" class="form-control form-control-line"
+                                           value="{{ companyDetails.user.city }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>phone</b></label>
+                                    <input type="text" name="phone" class="form-control form-control-line"
+                                           value="{{ companyDetails.user.phone }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Address</b></label>
+                                    <input type="text" name="address" class="form-control form-control-line"
+                                           value="{{ companyDetails.user.address }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Created</b></label>
+                                    <input type="text" name="created" class="form-control form-control-line"
+                                           value="{{ companyDetails.user.created | date('M d, Y, h:i a') }}" disabled="disabled">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12"><b>Last Updated At</b></label>
+                                    <input type="text" name="modified" class="form-control form-control-line"
+                                           value="{{ companyDetails.user.modified | date('M d, Y, h:i a') }}" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success btn-sm text-light">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-10">
+            <div class="card card-default">
+                <div class="card-header">
+                    <div class="card-actions">
+                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    </div>
+                    <h4 class="card-title m-b-0">Directors</h4>
+                </div>
+                <div class="card-body collapse show">
+                    <div class="table-responsive">
+                        {% if companyDetails.directors | length > 0 %}
+                            <table class="table product-overview">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Share Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for director in companyDetails.directors %}
+                                    <tr>
+                                        <td>{{ director.name }}</td>
+                                        <td>{{ director.designation }}</td>
+                                        <td>{{ director.shares_quantity }}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-info text-light updateDirectorBtn"
+                                               data-toggle="modal"
+                                               title="Edit this director?"
+                                               data-name="{{ director.name }}"
+                                               data-fatherhusbandname="{{ director.father_or_husband_name }}"
+                                               data-mothername="{{ director.mother_name }}"
+                                               data-presentaddress="{{ director.present_address }}"
+                                               data-datamobilenumber="{{ director.mobile_nmm }}"
+                                               data-emailaddress="{{ director.email_address }}"
+                                               data-country="{{ director.country }}"
+                                               data-dateofbirth="{{ director.date_of_birth }}"
+                                               data-designation="{{ director.designation }}"
+                                               data-etinno="{{ director.etin_no }}"
+                                               data-sharesquantity="{{ director.shares_quantity }}"
+                                               data-nidpasswordno="{{ director.nid_password_no }}"
+                                               data-id="{{ director.id }}">
+                                                Edit
+                                            </a>
+                                            <a class="btn btn-sm btn-danger text-light"
+                                               href="/directors/{{ director.uuid }}/delete">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <div class="text-center">
+                                <span class="text-danger">No data found</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <a class="btn btn-sm  btn-success text-light" data-toggle="modal" data-target="#directorsModal">
+                                Add Director
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-10">
+            <div class="card card-default">
+                <div class="card-header">
+                    <div class="card-actions">
+                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    </div>
+                    <h4 class="card-title m-b-0">Documents</h4>
+                </div>
+                <div class="card-body collapse show">
+                    <div class="table-responsive">
+                        {% if companyDetails.attachments | length > 0 %}
+                            <table class="table product-overview">
+                                <thead>
+                                <tr>
+                                    <th>Document Name</th>
+                                    <th>File Type</th>
+                                    <th>Document Type</th>
+                                    <th>File Size</th>
+                                    <th>Uploaded</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for attachment in companyDetails.attachments %}
+                                    <tr>
+                                        <td>{{ attachment.name }}</td>
+                                        <td>{{ attachment.file_type }}</td>
+                                        <td>{{ attachment.doc_type }}</td>
+                                        <td>{{ attachment.file_size*0.000001 ~ " MB" }}</td>
+                                        <td>{{ attachment.created|date("M d, Y h:i A") }}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-info text-light" title="Download this document"
+                                               href="/download-attachment/{{ attachment.uuid }}">Download</a>
+                                            <a class="btn btn-sm btn-danger text-light"
+                                               href="/documents/{{ attachment.uuid }}/delete">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <div class="text-center">
+                                <span class="text-danger text-center">No data found</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn btn-sm  btn-success" data-toggle="modal" data-target="#documetaryModal">
+                                Add Document
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/notes?related_with_id={{ companyDetails.id }}&related_with=company&from=/companies/details/{{ companyDetails.uuid }}"
+                          method="post">
+                        <div class="col-md-12">
+                            <label class="card-title">Notes</label>
+                            <div class="form-group">
+                                <textarea type="text" class="form-control" name="comments" rows="4"
+                                          placeholder="Write your note here...."></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="card-title">Private</label>
+                                <select class="form-control" name="is_private" rows="4">
+                                    <option value="1">Yes</option>
+                                    <option value="0" selected="selected">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success btn-sm text-light">Add Note</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <h4 class="card-title">Recent Notes</h4>
+                    <h6 class="card-subtitle">Latest Notes</h6>
+                    {% if companyDetails.notes | length > 0 %}
+                        <div class="comment-widgets m-b-20">
+                            {% for note in companyDetails.notes %}
+                                <div class="d-flex flex-row comment-row">
+                                    <div class="p-2"><span class="round">
+                                    {% if not note.user.profile_pic is empty %}
+                                        <img src="/{{ note.user.profile_pic }}" class="profile-pic" style="width: 30px"
+                                             onerror="this.onerror=null;this.src='/assets/images/users/profile.jpeg'"
+                                             alt="{{ note.user.first_name ~ " " ~ note.user.last_name }}"/>
+                                    {% else %}
+                                        <img src="/assets/images/users/profile.jpeg" class="profile-pic"
+                                             alt="{{ note.user.first_name ~ " " ~ note.user.last_name }}"
+                                             style="width: 30px"/>
+                                    {% endif %}
+                                </span>
+                                    </div>
+                                    <div class="comment-text w-100">
+                                        <h5>{{ note.user.first_name?:"-" }} {{ note.user.last_name }}</h5>
+                                        <div class="comment-footer">
+                                            <span class="date">{{ note.created|date("M d, Y, h:i:s a") }}</span>
+
+                                            {% if session.auth.user_info.role != "client" %}
+                                                <span class="action-icons">
+                                                    <a href="/notes/{{ note.uuid }}/delete"><i
+                                                                class="mdi mdi-delete"></i></a>
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                        <p class="m-b-5 m-t-10">{{ note.comments }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center">
+                            <span class="text-danger">There has no comments.</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="to-do-widget m-t-20">
+        <div class="modal fade bd-example-modal-lg" id="documetaryModal" tabindex="-1"
+             aria-labelledby="myLargeModalLabel" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Document</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/documents?related_with=company&related_with_id={{ companyDetails.id }}&from=/companies/{{ companyDetails.uuid }}"
+                              method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>File Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Write file name">
+                            </div>
+                            {% if session.auth.user_info.role != "client" %}
+                                <div class="form-group">
+                                    <label>Private</label>
+                                    <select class="form-control" name="is_private">
+                                        <option value="2" selected="selected">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
+                                </div>
+                            {% endif %}
+                            <div class="form-group">
+                                <label>File Upload</label>
+                                <input type="file" name="file_location_path" class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="to-do-widget m-t-20">
+        <div class="modal fade bd-example-modal-lg" id="directorsModal" tabindex="-1"
+             aria-labelledby="myLargeModalLabel" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Directors</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/companies/{{ companyDetails.uuid }}/addDirector" method="post"
+                              enctype="multipart/form-data">
+                            <div class="row">
+                                <input type="hidden" name="company_id" class="form-control" value="{{ companyDetails.id }}">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" name="name" class="form-control" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Father's Or Husband's Name</label>
+                                        <input type="text" name="father_or_husband_name" class="form-control"
+                                               placeholder="Father's or husband's name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Mother's Name</label>
+                                        <input type="text" name="mother_name" class="form-control"
+                                               placeholder="Mother's name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Present Address</label>
+                                        <input type="text" name="present_address" class="form-control"
+                                               placeholder="Present Address">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Mobile Number</label>
+                                        <input type="text" name="mobile_nmm" class="form-control"
+                                               placeholder="01XXXXXXXXX">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input type="text" name="email_address" class="form-control"
+                                               placeholder="@gmail.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        <input type="text" name="country" class="form-control"
+                                               placeholder="Country name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Date Of Birth</label>
+                                        <input type="date" name="date_of_birth" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Designation</label>
+                                        <input type="text" name="designation" class="form-control"
+                                               placeholder="Designation">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Tin No</label>
+                                        <input type="text" name="etin_no" class="form-control"
+                                               placeholder="XXX-XX-XXXX">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Shares Quantity</label>
+                                        <input type="text" name="shares_quantity" class="form-control"
+                                               placeholder="Shares quantity">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>NID No</label>
+                                        <input type="text" name="nid_password_no" class="form-control"
+                                               placeholder="Write NID number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#Update Director's Modal#}
+    <div class="to-do-widget m-t-20">
+        <div class="modal fade bd-example-modal-lg" id="updateDirector" tabindex="-1"
+             aria-labelledby="myLargeModalLabel" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Director's Details</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/directors/update" method="post"
+                              enctype="multipart/form-data">
+
+                            <input id="dataId" type="hidden" value="{{ director.id }}" class="form-control"
+                                   name="id">
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input id="dataName" type="text" value="{{ director.name }}"
+                                               class="form-control" name="name" required="required" minlength="2" maxlength="100">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Father's Or Husband's Name</label>
+                                        <input type="text" id="dataFatherOrHusbandName" name="father_or_husband_name" class="form-control"
+                                               value="{{ director.father_or_husband_name }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Mother's Name</label>
+                                        <input type="text" id='dataMotherName' name="mother_name" class="form-control"
+                                               value="{{ director.mother_name }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Present Address</label>
+                                        <input id="dataPresentAddress" type="text" name="present_address" class="form-control"
+                                               value="{{ director.present_address ? : '' }}" placeholder="Present Address">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Mobile Number</label>
+                                        <input id="dataMobileNumber" type="text" name="mobile_nmm" class="form-control"
+                                               value="{{ director.mobile_nmm }}" placeholder="01XXXXXXXXX">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input id="dataEmailAddress"type="text" name="email_address" class="form-control"
+                                               value="{{ director.email_address ? : "" }}" placeholder="@gmail.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        <input id="dataCountry" type="text" name="country" class="form-control"
+                                               value="{{ director.country ? : "" }}" placeholder="Country name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Date Of Birth</label>
+                                        <input id="dataDateOfBirth" type="date" class="form-control"
+                                               name="date_of_birth" value="{{ director.date_of_birth }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Designation</label>
+                                        <input id="dataDesignation" type="text" name="designation" class="form-control"
+                                               value="{{ director.designation ? : '' }}" placeholder="Designation">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Tin No</label>
+                                        <input id="dataEtinNo" type="text" name="etin_no" class="form-control"
+                                               value="{{ director.etin_no ? : '' }}" placeholder="XXX-XX-XXXX">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Shares Quantity</label>
+                                        <input id="datasharesQuantity" type="text" value="{{ director.shares_quantity }}"
+                                               class="form-control" name="shares_quantity">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsBottom %}
+    <script>
+        $(document).ready(function () {
+            $(".updateDirectorBtn").click(function () {
+                $("#dataName").val($(this).data('name'));
+                $("#dataFatherOrHusbandName").val($(this).data('fatherhusbandname'));
+                $("#dataMotherName").val($(this).data('mothername'));
+                $("#dataPresentAddress").val($(this).data('presentaddress'));
+                $("#dataMobileNumber").val($(this).data('datamobilenumber'));
+                $("#dataEmailAddress").val($(this).data('emailaddress'));
+                $("#dataCountry").val($(this).data('country'));
+                $("#dataDateOfBirth").val($(this).data('dateofbirth'));
+                $("#dataDesignation").val($(this).data('designation'));
+                $("#dataEtinNo").val($(this).data('etinno'));
+                $("#datasharesQuantity").val($(this).data('sharesquantity'));
+                $("#dataNidPasswordNo").val($(this).data('nidpasswordno'));
+                $("#dataId").val($(this).data('id'));
+
+                $('#updateDirector').modal('show');
+            });
+        })
+    </script>
+{% endblock %}

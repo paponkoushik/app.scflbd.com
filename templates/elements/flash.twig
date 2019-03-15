@@ -1,0 +1,17 @@
+{% if message %}
+    {% if message.success %}
+        {% for message in message.success %}
+            <div class="notice notice-success alert" id="AppFlashMessage">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ message | raw }}
+            </div>
+        {% endfor %}
+    {% else %}
+        {% for message in message.error %}
+            <div class="notice notice-danger alert" id="AppFlashMessage">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ message | raw }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endif %}

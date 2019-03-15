@@ -1,0 +1,159 @@
+{% extends 'layouts/application.twig' %}
+{% block title %} SCFL | Profile {% endblock %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Profile</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active">Profile</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <center class="m-t-30">
+                    {% if not userInfo.profile_pic is empty %}
+                        <img src="/{{ userInfo.profile_pic }}" class="profile-pic" style="width: 80px"
+                             onerror="this.onerror=null;this.src='/assets/images/users/profile.jpeg'"/>
+                    {% else %}
+                        <img src="/assets/images/users/profile.jpeg" class="profile-pic"/>
+                    {% endif %}
+                    <h4 class="card-title m-t-10">
+                        {% if not userInfo is empty %}
+                            {{ userInfo.first_name | capitalize }} {{ userInfo.last_name | capitalize }}
+                        {% endif %}
+                    </h4>
+                    <h6 class="card-subtitle">
+                        {% if not session.auth.user_role is empty %}
+                            {{ session.auth.user_role | capitalize }}
+                        {% endif %}
+                    </h6>
+                </center>
+            </div>
+            <div>
+                <hr> </div>
+            <div class="card-body"> <small class="text-muted">Email address </small>
+                <h6>
+                    {% if not userInfo.email_address is empty %}
+                        {{ userInfo.email_address }}
+                    {% endif %}
+                </h6>
+                <small class="text-muted p-t-30 db">Phone</small>
+                <h6>
+                    {% if not userInfo.phone is empty %}
+                        {{ userInfo.phone }}
+                    {% else %}
+                        <span>N/A</span>
+                    {% endif %}
+                </h6>
+                <small class="text-muted p-t-30 db">Address</small>
+                <h6>
+                    {% if not userInfo.address is empty %}
+                        {{ userInfo.address }}
+                    {% else %}
+                        <span>N/A</span>
+                    {% endif %}
+                </h6>
+                <div class="map-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div> <small class="text-muted p-t-30 db">Social Profile</small>
+                <br/>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-facebook"></i></button>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-twitter"></i></button>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-youtube"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card">
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item nav-link">Personal Info</li>
+            </ul>
+            <div class="card-body">
+                <form class="form-horizontal form-material" method="post" action="/profile/{{ userInfo.uuid }}">
+                    <div class="form-group">
+                        <label class="col-md-12">First Name</label>
+                        <div class="col-md-12">
+                            <input type="text" required="required" name="first_name" value="{{ userInfo.first_name | capitalize ?: "" }}" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Last Name</label>
+                        <div class="col-md-12">
+                            <input type="text" required="required" name="last_name" value="{{ userInfo.last_name | capitalize ?: "" }}" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email_address" class="col-md-12">Email</label>
+                        <div class="col-md-12">
+                            <input type="email" disabled="disabled" required="required" name="email_address"  value="{{ userInfo.email_address ?: "" }}" class="form-control form-control-line" id="example-email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Company Name</label>
+                        <div class="col-md-12">
+                            <input type="text" name="company_name" value="{{ userInfo.company_name | capitalize ?: "" }}" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Website</label>
+                        <div class="col-md-12">
+                            <input type="url" name="website" value="{{ userInfo.website ?: "" }}" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12">Select Gender</label>
+                        <div class="col-sm-12">
+                            <select class="form-control form-control-line" name="gender">
+                                <option value="">Choose one</option>
+                                <option value="male" {{ userInfo.gender == "male" ? 'selected' : "" }}>Male</option>
+                                <option value="female" {{ userInfo.gender == "female" ? 'selected' : "" }}>Female</option>
+                                <option value="other" {{ userInfo.gender == "other" ? 'selected' : "" }}>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Phone No</label>
+                        <div class="col-md-12">
+                            <input type="text" name="phone" value="{{ userInfo.phone ?: "" }}" class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12">Select City</label>
+                        <div class="col-sm-12">
+                            <select class="form-control form-control-line" name="city">
+                                <option value="">Choose one</option>
+                                <option value="dhaka" {{ userInfo.city == "dhaka" ? 'selected' : "" }}>Dhaka</option>
+                                <option value="chittagong" {{ userInfo.city == "chittagong" ? 'selected' : "" }}>Chittagong</option>
+                                <option value="sylhet" {{ userInfo.city == "sylhet" ? 'selected' : "" }}>Sylhet</option>
+                                <option value="khulna" {{ userInfo.city == "khulna" ? 'selected' : "" }}>Khulna</option>
+                                <option value="comilla" {{ userInfo.city == "comilla" ? 'selected' : "" }}>Comilla</option>
+                                <option value="barisal" {{ userInfo.city == "barisal" ? 'selected' : "" }}>Barisal</option>
+                                <option value="bogra" {{ userInfo.city == "bogra" ? 'selected' : "" }}>Bogra</option>
+                                <option value="rangpur" {{ userInfo.city == "rangpur" ? 'selected' : "" }}>Rangpur</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Address</label>
+                        <div class="col-md-12">
+                            <textarea name="address" class="form-control form-control-line">{{ userInfo.address ?: "" }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">Update Profile</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

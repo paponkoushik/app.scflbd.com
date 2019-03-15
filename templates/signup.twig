@@ -1,0 +1,42 @@
+{% extends 'layouts/signup_layout.twig' %}
+{% block title %} Create Your Account - Satkhira Consulting Firm Limited {% endblock %}
+{% block content %}
+    <form class="form-horizontal form-material" id="signupform" action="/signupProcess" method="post">
+        <div class="text-center"><img src="/assets/images/logo/Logo.jpg" alt="Company Logo" style="width: 80px"></div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <input class="form-control" name="first_name" type="text" required="required" placeholder="First Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <input class="form-control" name="last_name" type="text" required="required" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-group ">
+            <div class="col-xs-12">
+                <input class="form-control" type="email" name="email_address" required="required" placeholder="Email address">
+            </div>
+        </div>
+        <div class="form-group ">
+            <div class="col-xs-12">
+                <input class="form-control" type="password" name="password" required="required" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <input class="form-control" type="password" name="confirm_password" required="required" placeholder="Confirm Password">
+            </div>
+        </div>
+        <div class="form-group text-center m-t-20">
+            <div class="col-xs-12">
+                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Sign Up</button>
+            </div>
+        </div>
+        <div class="form-group m-b-0">
+            <div class="col-sm-12 text-center">
+                <div>Already have an account? <a href="/?redirectUrl={{ redirectUrl ?: "/" }}" class="text-info m-l-5"><b>Sign In</b></a></div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

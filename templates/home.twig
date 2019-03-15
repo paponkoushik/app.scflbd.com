@@ -1,0 +1,227 @@
+{% extends 'layouts/application.twig' %}
+{% block title %} SCFL | Home {% endblock %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Dashboard</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Row -->
+                    <div class="row">
+                        <div class="col-8"><h2>{{ summary.company.total }}<i class="ti-angle-down font-14 text-danger"></i></h2>
+                            <h6>Total Companies</h6></div>
+                        <div class="col-4 align-self-center text-right  p-l-0">
+                            <div id="sparklinedash3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Row -->
+                    <div class="row">
+                        <div class="col-8"><h2 class="">{{ summary.invoice.invoices.0.unpaid }} BDT <i class="ti-angle-up font-14 text-success"></i></h2>
+                            <h6>Total Due</h6></div>
+                        <div class="col-4 align-self-center text-right p-l-0">
+                            <div id="sparklinedash"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8"><h2>{{ summary.invoice.invoices.0.paid }} BDT<i class="ti-angle-up font-14 text-success"></i></h2>
+                            <h6>Total Paid</h6></div>
+                        <div class="col-4 align-self-center text-right p-l-0">
+                            <div id="sparklinedash2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8"><h2>{{ summary.order.total }}  <i class="ti-angle-down font-14 text-danger"></i></h2>
+                            <h6>Total Orders</h6></div>
+                        <div class="col-4 align-self-center text-right p-l-0">
+                            <div id="sparklinedash4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-default">
+                <div class="card-header">
+                    <div class="card-actions">
+                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    </div>
+                    <h4 class="card-title m-b-0">Latest Companies</h4>
+                </div>
+                <div class="card-body collapse show">
+                    <div class="table-responsive">
+                        {% if summary.company.companies | length > 0 %}
+                            <table class="table product-overview">
+                                <thead>
+                                <tr>
+                                    <th>Company Name</th>
+                                    <th>Company Holder</th>
+                                    <th>Status</th>
+                                    <th>Registered At</th>
+                                    <th>Order Submitted At</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for company in summary.company.companies %}
+                                    <tr>
+                                        <td><a href="/companies/details/{{ company.uuid }}">{{ company.company_name_one }}</a></td>
+                                        <td><a href="/companies/details/{{ company.uuid }}">{{ company.user.first_name }} {{ company.user.last_name }} </a></td>
+                                        <td>
+                                            {% if company.status == "rejected" %}
+                                                <span class="label label-danger ">{{ "Rejected" }}</span>
+                                            {% elseif company.status == "registered" %}
+                                                <span class="label label-success">{{ "Registered" }}</span>
+                                            {% elseif company.status == "pending" %}
+                                                <span class="label label-warning">{{ "Pending" }}</span>
+                                            {% elseif company.status == "cancelled" %}
+                                                <span class="label label-danger">{{ "Cancelled" }}</span>
+                                            {% elseif company.status == "under_processing" %}
+                                                <span class="label label-primary">{{ "Under Processing" }}</span>
+                                            {% elseif company.status == "active" %}
+                                                <span class="label label-success">{{ "Active" }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ compnay.created | date('M d, Y, h:i a') }}</td>
+                                        <td>{{ company.order_submitted_at | date('M d, Y, h:i a') }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <span class="text-danger">No company found</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card card-default">
+                <div class="card-header">
+                    <div class="card-actions">
+                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    </div>
+                    <h4 class="card-title m-b-0">Latest Orders</h4>
+                </div>
+                <div class="card-body collapse show">
+                    <div class="table-responsive">
+                        {% if summary.order.orders | length > 0 %}
+                            <table class="table product-overview">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Service Type</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Created</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for order in summary.order.orders %}
+                                    <tr>
+                                        <td><a href="/orders/{{ order.uuid }}">{{ order.orders_sl }}</a></td>
+                                        <td><a href="/orders/{{ order.uuid }}">{{ order.related_with }}</a></td>
+                                        <td>{{ order.total_amount }}</td>
+                                        <td>
+                                            {% if order.status == 1 %}
+                                                <span class="label label-info ">Submitted</span>
+                                            {% else %}
+                                                <span class="label label-warning ">Pending</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ order.created | date('M d, Y, h:i a')  }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <span class="text-danger">No order found</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-sidebar">
+        <div class="slimscrollright">
+            <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
+            <div class="r-panel-body">
+                <ul id="themecolors" class="m-t-20">
+                    <li><b>With Light sidebar</b></li>
+                    <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
+                    <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
+                    <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
+                    <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a></li>
+                    <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
+                    <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
+                    <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
+                    <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
+                    <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
+                    <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
+                    <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
+                    <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
+                    <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
+                </ul>
+                <ul class="m-t-20 chatonline">
+                    <li><b>Chat option</b></li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="/assets/images/users/1.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="/assets/images/users/2.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="/assets/images/users/3.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="/assets/images/users/4.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="/assets/images/users/5.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="/assets/images/users/6.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="/assets/images/users/7.jpg" alt="user-img" class="img-circle"> <span>Hritik Roshan<small class="text-success">online</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="/assets/images/users/8.jpg" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

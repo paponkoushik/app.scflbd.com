@@ -1,0 +1,88 @@
+{% extends 'layouts/application.twig' %}
+{% block title %} SCFL | Supports {% endblock %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Supports</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active">Supports</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-default">
+                <div class="card-header">
+                    <div class="card-actions">
+                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                    </div>
+                </div>
+                <div class="card-body collapse show">
+                    <div class="table-responsive">
+                        <table class="table product-overview">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Subject</th>
+                                <th>Content</th>
+                                <th>Modified</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><a>Papon</a></td>
+                                <td>Koushik</td>
+                                <td>papon@gmail.com</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td><a>Papon</a></td>
+                                <td>Koushik</td>
+                                <td>papon@gmail.com</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td><a>Papon</a></td>
+                                <td>Koushik</td>
+                                <td>papon@gmail.com</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td><a>Papon</a></td>
+                                <td>Koushik</td>
+                                <td>papon@gmail.com</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td><a>Papon</a></td>
+                                <td>Koushik</td>
+                                <td>papon@gmail.com</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td><a>Papon</a></td>
+                                <td>Koushik</td>
+                                <td>papon@gmail.com</td>
+                                <td>Male</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="fa-pull-right">
+                        <a class="btn btn-primary btn-sm text-light" href="">Next</a>
+                    </div>
+                    <div class="fa-pull-left">
+                        <a class="btn btn-primary btn-sm text-light" href="">Previous</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

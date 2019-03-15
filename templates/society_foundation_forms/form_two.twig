@@ -1,0 +1,163 @@
+{% extends 'layouts/company_registration_layout.twig' %}
+{% block title %} SCFL | Company Registration {% endblock %}
+{% block pageTitle %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">New Society/Foundation/Trust Registration</h3>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-8 col-xlg-9 col-md-7">
+            <div class="card">
+                <ul class="nav nav-tabs profile-tab" role="tablist">
+                    <li class="nav-item nav-link">Particulars of Society/Foundation/Trust Registration</li>
+                </ul>
+                <div class="card-body">
+                    <form class="form-horizontal form-material" method="post" action="/start/society-foundation/form-submit">
+                        {% for data in formData %}
+                            {% for key, getData in data %}
+                                <input type="hidden" name="{{ key }}" value="{{ getData }}">
+                            {% endfor %}
+                        {% endfor %}
+                        <div class="form-group">
+                            <label class="col-md-12">Name</label>
+                            <div class="col-md-12">
+                                <input type="text"  name="society_foundation[particular_name]" class="form-control form-control-line">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Father's/Husband's Name</label>
+                                    <input type="text"  name="society_foundation[particular_father_or_husband_name]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Mother's Name</label>
+                                    <input type="text"  name="society_foundation[particular_mother_name]" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Present Address</label>
+                                    <textarea name="society_foundation[particular_present_address]" class="form-control form-control-line"></textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Permanent Address</label>
+                                    <textarea name="society_foundation[particular_permanent_address]" class="form-control form-control-line"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Mobile No.</label>
+                                    <input type="text"  name="society_foundation[particular_mobile]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Email Address</label>
+                                    <input type="text"  name="society_foundation[particular_email_address]" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Date Of Birth</label>
+                            <div class="col-md-12">
+                                <input  type="date" name="society_foundation[particular_date_of_birth]" class="form-control form-control-line">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Designation</label>
+                                    <input type="text"  name="society_foundation[particular_designation]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12">Occupation</label>
+                                    <input type="text"  name="society_foundation[particular_occupation]" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="col-md-12">ETIN No.</label>
+                                    <input type="text"  name="society_foundation[particular_etin_no]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-12">Shares Quantity</label>
+                                    <input type="text"  name="society_foundation[particular_shares_quantity]" class="form-control form-control-line">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-12">NID/Passport No.</label>
+                                    <input type="text"  name="society_foundation[particular_nid_password_no]" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xlg-3 col-md-5">
+            <div class="card">
+                <ul class="nav nav-tabs profile-tab" role="tablist">
+                </ul>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <b>1<sup>st</sup> Step</b><br>
+                            NC (Govt. Fees 230/=)  =  700/=
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <b>2<sup>nd</sup> Step</b><br>
+                            <p>Govt. Fees (2400 + 15%) = </p>
+                            <p>Stamp (2,000) = </p>
+                            <p>Notary</p>
+
+                        </div>
+                        <div class="col-md-6">
+                            <b>Govt. Fees</b><br>
+                            <p>2,760/-</p>
+                            <p>2,200/-</p>
+                            <p>500/-</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <b>3<sup>rd</sup> Step</b><br>
+                            <p>Paper Ready and Online Maintaining Charge - </p>
+                            <p>Consultancy - </p>
+                            <p>Total = </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <b>4<sup>th</sup> Step</b><br>
+                            <p>Certificate</p>
+                            <p>Original deed</p>
+                            <p>Certified Copy From I (If You 2,000/=)</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <b>Delivery</b><br>
+                            <p>By and</p>
+                            <p>By Courier</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

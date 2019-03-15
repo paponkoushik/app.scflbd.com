@@ -1,0 +1,43 @@
+
+Dear {{ profile.first_name }},
+
+
+Thank you for creating account with Satkhira Consulting Firm Limited.
+
+
+In order to complete email verification, please copy the following link in your browser to verify your email.
+
+
+Email verification link: {{ options.verification_url }}
+
+
+You will receive an email from us shortly once your email address is verified and all getting started
+information.
+
+
+-
+Satkhira Consulting Firm Limited Team
+
+
+{% block metascript %}
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "EmailMessage",
+  "description": "Verify your email address",
+  "potentialAction": {
+    "@type": "ViewAction",
+    "target": "{{ options.verification_url }}",
+    "name": "Verify Email",
+    "url": "{{ options.verification_url }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Preview Technologies Limited",
+    "url": "{{ viewconfig.config.site_url }}",
+    "url/facebook": "https://facebook.com/previewtechs"
+  }
+}
+
+    </script>
+{% endblock %}
